@@ -5,6 +5,13 @@
 #include <cstdlib>
 #include <netinet/in.h>
 #include <cstring>
+#include "../../Library/rapidjson/document.h"
+#include "../../Library/rapidjson/writer.h"
+#include "../../Library/rapidjson/stringbuffer.h"
+#include "Json.h"
+
+using namespace rapidjson;
+
 
 #define PORT 8080
 
