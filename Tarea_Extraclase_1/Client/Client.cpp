@@ -3,14 +3,18 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include <cstring>
+#include <string>
+#include <fstream>
+
+using namespace std;
 
 #define PORT 8080
+
+string data;
 
 int main(int argc, char const *argv[]) {
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char hello[] = "Hello from client";
     char buffer[1024] = {0};
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("\n Socket creation error \n");
@@ -30,10 +34,24 @@ int main(int argc, char const *argv[]) {
         printf("\nConnection Failed \n");
         return -1;
     }
-    send(sock, hello, strlen(hello), 0);
-    printf("Hello message sent\n");
+
+    send(sock, buffer, data.length(), 0);
+    printf("Data sent\n");
     valread = read(sock, buffer, 1024);
     printf("%s\n", buffer);
     return 0;
 }
+
+
+void turntostring(fstream *txt) {
+    ifstream file("graph_data.txt");
+    if (file.is_open()) {
+        while (file.good()) {
+            getline(file, data);
+            file.close();
+        }
+    }
+
+}
+
 
