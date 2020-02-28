@@ -5,12 +5,11 @@
 #include <cstdlib>
 #include <netinet/in.h>
 #include <cstring>
-#include "../../Library/rapidjson/document.h"
-#include "../../Library/rapidjson/writer.h"
-#include "../../Library/rapidjson/stringbuffer.h"
+#include <iostream>
 #include "Json.h"
 
-using namespace rapidjson;
+using namespace std;
+
 
 
 #define PORT 8080
@@ -21,7 +20,7 @@ int main(int argc, char const *argv[]) {
     int opt = 1;
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
-    char hello[] = "Hello from server";
+    char initialmessage[] = "Please enter the text you want the server to see; if anytime you want to stop please write: exit";
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -40,8 +39,7 @@ int main(int argc, char const *argv[]) {
     address.sin_port = htons(PORT);
 
     // Forcefully attaching socket to the port 8080
-    if (bind(server_fd, (struct sockaddr *) &address,
-             sizeof(address)) < 0) {
+    if (bind(server_fd, (struct sockaddr *) &address, sizeof(address)) < 0) {
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
@@ -49,15 +47,29 @@ int main(int argc, char const *argv[]) {
         perror("listen");
         exit(EXIT_FAILURE);
     }
-    if ((new_socket = accept(server_fd, (struct sockaddr *) &address,
-                             (socklen_t * ) & addrlen)) < 0) {
+    if ((new_socket = accept(server_fd, (struct sockaddr *) &address, (socklen_t *) &addrlen)) < 0) {
         perror("accept");
         exit(EXIT_FAILURE);
     }
+
+    char finish[5] = "exit";
+    char text[1024];
+
+    send(new_socket, initialmessage, strlen(initialmessage), 0);
+    printf("Initial message sent\n");
+
+
     valread = read(new_socket, buffer, 1024);
-    printf("%s\n", buffer);
-    send(new_socket, hello, strlen(hello), 0);
-    printf("Hello message sent\n");
+    while (reinterpret_cast<char *>(valread) != finish) {
+        valread = read(new_socket, buffer, 1024);
+        printf("%s\n", buffer);
+        cin >> text;
+        send(new_socket, text, strlen(text * ))
+        cout << "Message sent, wainting for response";
+
+    }
+
+
     return 0;
 }
 
