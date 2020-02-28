@@ -6,6 +6,8 @@
 #include <netinet/in.h>
 #include <cstring>
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "Json.h"
 
 using namespace std;
@@ -14,13 +16,16 @@ using namespace std;
 
 #define PORT 8080
 
+string data;
+
 int main(int argc, char const *argv[]) {
     int server_fd, new_socket, valread;
     struct sockaddr_in address;
     int opt = 1;
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
-    char initialmessage[] = "Please enter the text you want the server to see; if anytime you want to stop please write: exit";
+
+
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -29,8 +34,7 @@ int main(int argc, char const *argv[]) {
     }
 
     // Forcefully attaching socket to the port 8080
-    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
-                   &opt, sizeof(opt))) {
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
         perror("setsockopt");
         exit(EXIT_FAILURE);
     }
@@ -52,24 +56,31 @@ int main(int argc, char const *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    char finish[5] = "exit";
-    char text[1024];
 
-    send(new_socket, initialmessage, strlen(initialmessage), 0);
-    printf("Initial message sent\n");
 
+    send(new_socket, buffer ,data.length(),0);
+    printf("Data sent\n");
 
     valread = read(new_socket, buffer, 1024);
-    while (reinterpret_cast<char *>(valread) != finish) {
-        valread = read(new_socket, buffer, 1024);
-        printf("%s\n", buffer);
-        cin >> text;
-        send(new_socket, text, strlen(text * ))
-        cout << "Message sent, wainting for response";
+    printf("%s\n", buffer);
 
-    }
+
 
 
     return 0;
+
 }
+
+
+void turntostring(fstream* txt){
+    ifstream file("graph_data.txt");
+    if (file.is_open()){
+        while(file.good()){
+            getline(file, data);
+            file.close();
+        }
+    }
+
+}
+
 

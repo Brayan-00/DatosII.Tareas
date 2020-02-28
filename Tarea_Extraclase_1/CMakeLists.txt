@@ -8,5 +8,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
-add_executable(Client Client/Client.cpp)
+add_executable(Client Client/Client.cpp texttest.cpp)
 add_executable(Server Server/Server.cpp)
+add_executable(test texttest.cpp)
