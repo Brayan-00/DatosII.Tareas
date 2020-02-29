@@ -5,17 +5,31 @@
 #include <unistd.h>
 #include <string>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
 #define PORT 8080
 
-string data;
+string data_temp;
+string data[2048];
+
+
+void turntostring() {
+    ifstream file("graph_data.txt");
+    if (file.is_open()) {
+        while (file.good()) {
+            getline(file, data_temp);
+            file.close();
+            data->append(data_temp, data_temp.length());
+        }
+    }
+
+}
 
 int main(int argc, char const *argv[]) {
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char buffer[1024] = {0};
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("\n Socket creation error \n");
         return -1;
@@ -34,24 +48,15 @@ int main(int argc, char const *argv[]) {
         printf("\nConnection Failed \n");
         return -1;
     }
-
-    send(sock, buffer, data.length(), 0);
-    printf("Data sent\n");
-    valread = read(sock, buffer, 1024);
-    printf("%s\n", buffer);
+    //turntostring();
+    //send(sock, buffer, data.length(), 0);
+    //printf("Data sent\n");
+    valread = read(sock, data, 1024);
+    cout<<data<<endl;
     return 0;
 }
 
 
-void turntostring(fstream *txt) {
-    ifstream file("graph_data.txt");
-    if (file.is_open()) {
-        while (file.good()) {
-            getline(file, data);
-            file.close();
-        }
-    }
 
-}
 
 

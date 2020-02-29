@@ -16,14 +16,29 @@ using namespace std;
 
 #define PORT 8080
 
-string data;
+string data_temp;
+string data[2048];
+
+
+void turntostring(){
+    ifstream file("graph_data.txt");
+    if (file.is_open()){
+        while(file.good()){
+            getline(file, data_temp);
+            file.close();
+            data->append(data_temp, data_temp.length());
+        }
+    }
+}
+
+
 
 int main(int argc, char const *argv[]) {
     int server_fd, new_socket, valread;
     struct sockaddr_in address;
     int opt = 1;
     int addrlen = sizeof(address);
-    char buffer[1024] = {0};
+
 
 
 
@@ -57,30 +72,16 @@ int main(int argc, char const *argv[]) {
     }
 
 
-
-    send(new_socket, buffer ,data.length(),0);
+    turntostring();
+    send(new_socket, data ,2048,0);
     printf("Data sent\n");
 
-    valread = read(new_socket, buffer, 1024);
-    printf("%s\n", buffer);
-
-
-
+    valread = read(new_socket, data, 2048);
+    cout<<data<<endl;
 
     return 0;
 
 }
 
-
-void turntostring(fstream* txt){
-    ifstream file("graph_data.txt");
-    if (file.is_open()){
-        while(file.good()){
-            getline(file, data);
-            file.close();
-        }
-    }
-
-}
 
 
