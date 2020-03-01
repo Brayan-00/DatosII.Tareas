@@ -52,7 +52,7 @@ int main(int argc, char const *argv[]) {
     //send(sock, buffer, data.length(), 0);
     //printf("Data sent\n");
     valread = read(sock, data, 1024);
-    cout<<data<<endl;
+    cout << &data << endl;
     return 0;
 }
 

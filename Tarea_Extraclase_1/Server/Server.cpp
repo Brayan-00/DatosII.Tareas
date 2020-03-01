@@ -8,10 +8,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "../../Library/rapidjson/document.h"
+#include "../../Library/rapidjson/writer.h"
+#include "../../Library/rapidjson/stringbuffer.h"
 #include "Json.h"
 
 using namespace std;
-
+using namespace rapidjson;
 
 
 #define PORT 8080
@@ -27,6 +30,7 @@ void turntostring(){
             getline(file, data_temp);
             file.close();
             data->append(data_temp, data_temp.length());
+            cout << "This is the data: " << data << endl;
         }
     }
 }
@@ -39,7 +43,9 @@ int main(int argc, char const *argv[]) {
     int opt = 1;
     int addrlen = sizeof(address);
 
-
+    const char *json = "{\"project\":\"rapidjson\",\"stars\":10}";
+    Document d;
+    d.Parse(json);
 
 
     // Creating socket file descriptor
@@ -73,11 +79,11 @@ int main(int argc, char const *argv[]) {
 
 
     turntostring();
-    send(new_socket, data ,2048,0);
+    send(new_socket, d, 2048, 0);
     printf("Data sent\n");
 
     valread = read(new_socket, data, 2048);
-    cout<<data<<endl;
+    cout << &data << endl;
 
     return 0;
 
