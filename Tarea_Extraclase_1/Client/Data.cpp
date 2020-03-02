@@ -27,11 +27,11 @@ public:
         new_value.bestRoute = bestRoute;
         ofstream file;
         file.open("clientData.txt");
-        if(file.is_open()){
-            file << graph;
+        if (file) {
+            file << string(graph);
             file.close();
-        }else{
-            cout<<"ERROR: No se pudo abrir txt del cliente"<<endl;
+        } else {
+            cout << "ERROR: No se pudo abrir txt del cliente" << endl;
         }
 
     }
@@ -39,23 +39,21 @@ public:
         return new_value.graph;
     }
     char* get_bestRoute(){
-        return new_value.graph;
+        return new_value.bestRoute;
     }
-    void set_graph(char* graph){
+    void set_graph(char* graph) {
         fstream file;
-        file.open("clientData.txt", ios::out | ios::trunc);
-        if (file.is_open()) {
-            file << graph;
+        file.open("clientData.txt");
+        if (file) {
+            file << string(graph);
             file.close();
-        }else{
-            cout<<"ERROR: No se pudo abrir txt del cliente"<<endl;
+        } else {
+            cout << "ERROR: No se pudo abrir txt del cliente" << endl;
         }
         new_value.graph = graph;
     }
-    void set_bestRoute(){
-        cout<<"Por favor ingrese con el siguiente formato: {a,b} los nodos para encontrar la ruta más corta"<<endl;
-        char* received;
-        cin>> received;
-        new_value.bestRoute = received;
+
+    void set_bestRoute(char *bestRoute) {
+        new_value.bestRoute = bestRoute;
     }
 };

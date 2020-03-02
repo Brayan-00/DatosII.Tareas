@@ -13,12 +13,12 @@ int main(int argc, char const *argv[]) {
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
     char buffer[1024] = {0};
-    Data *new_value = new Data(const_cast<char*>("{0, 1},\n""{1, 2},\n"
-                              "{2, 0},\n"
-                              "{2, 1},\n"
-                              "{3, 2},\n"
-                              "{4, 5},\n"
-                              "{5, 4}"), const_cast<char*>("{1,5}"));
+    Data *new_value = new Data(const_cast<char *>("{0, 1},\n""{1, 2},\n"
+                                                  "{2, 0},\n"
+                                                  "{2, 1},\n"
+                                                  "{3, 2},\n"
+                                                  "{4, 5},\n"
+                                                  "{5, 4}"), const_cast<char *>("{1,5}"));
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("\n Socket creation error \n");
         return -1;
@@ -37,18 +37,18 @@ int main(int argc, char const *argv[]) {
         return -1;
     }
 
-
-
-
-
-    send(sock, new_value->get_graph(),strlen(new_value->get_graph()), 0);
+    bzero(buffer, sizeof(buffer));
+    send(sock, new_value->get_graph(), strlen(new_value->get_graph()), 0);
     printf("Graph sent\n");
     valread = read(sock, buffer, 1024);
     printf("%s\n", buffer);
-    send(sock, new_value->get_bestRoute(), strlen(new_value->get_bestRoute()),0);
+    bzero(buffer, sizeof(buffer));
+    send(sock, new_value->get_bestRoute(), strlen(new_value->get_bestRoute()), 0);
     printf("Best route requested\n");
     valread = read(sock, buffer, 1024);
     printf("%s", buffer);
+    bzero(buffer, sizeof(buffer));
+
 
     return 0;
 }

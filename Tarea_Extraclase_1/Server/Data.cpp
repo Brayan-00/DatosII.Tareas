@@ -25,37 +25,50 @@ public:
     Data(char* graph, char* bestRoute){
         new_value.graph = graph;
         new_value.bestRoute = bestRoute;
-        ofstream file;
-        file.open("serverData.txt");
-        if(file.is_open()){
-            file << graph;
-            file.close();
-        }else{
-            cout<<"ERROR: No se pudo abrir txt del servidor"<<endl;
-        }
 
     }
-    Data(){
+
+    Data() {
 
     }
-    char* get_graph(){
+
+    char *get_graph() {
         return new_value.graph;
     }
-    char* get_bestRoute(){
+
+    char *get_bestRoute() {
         return new_value.graph;
     }
-    void set_graph(char* graph){
-        fstream file;
-        file.open("serverData.txt", ios::out | ios::trunc);
-        if (file.is_open()) {
-            file << graph;
-            file.close();
-        }else{
-            cout<<"ERROR: No se pudo abrir txt del server"<<endl;
-        }
+
+    void set_graph(char *graph) {
         new_value.graph = graph;
     }
-    void set_bestRoute(char* bestRoute){
+
+    void set_bestRoute(char *bestRoute) {
         new_value.bestRoute = bestRoute;
     }
+
+    void writeTxt() {
+        ofstream file;
+        file.open("serverData.txt", ios::out | ios::trunc);
+        if (file.is_open()) {
+            file << string(this->get_graph());
+            file.close();
+        } else {
+            cout << "ERROR: No se pudo abrir txt del server" << endl;
+        }
+    }
+
+    void printTxt() {
+        ifstream file;
+        file.open("serverData.txt", ios::in);
+        char output[100];
+        while (!file.eof()) {
+            file.getline(output, 100);
+            cout << output << endl;
+        }
+        file.close();
+
+    }
 };
+
