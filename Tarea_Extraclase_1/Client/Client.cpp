@@ -12,7 +12,8 @@
 int main(int argc, char const *argv[]) {
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char buffer[1024] = {0};
+    char buffer[2048] = {0};
+    bool finished = false;
     Data *new_value = new Data(const_cast<char *>("{0, 1},\n""{1, 2},\n"
                                                   "{2, 0},\n"
                                                   "{2, 1},\n"
@@ -36,18 +37,29 @@ int main(int argc, char const *argv[]) {
         printf("\nConnection Failed \n");
         return -1;
     }
+    /*char* isfinished = "end";
+    while(!finished){
+        if(buffer == isfinished){
+            finished = true;
+            cout << "Se ha terminado la comunicación..."<<endl;
+        }
 
+    }*/
     bzero(buffer, sizeof(buffer));
     send(sock, new_value->get_graph(), strlen(new_value->get_graph()), 0);
     printf("Graph sent\n");
-    valread = read(sock, buffer, 1024);
+    valread = read(sock, buffer, 2048);
     printf("%s\n", buffer);
     bzero(buffer, sizeof(buffer));
     send(sock, new_value->get_bestRoute(), strlen(new_value->get_bestRoute()), 0);
-    printf("Best route requested\n");
-    valread = read(sock, buffer, 1024);
+    printf("Distancia solicitada\n");
+    valread = read(sock, buffer, 2048);
     printf("%s", buffer);
+    valread = read(sock, buffer, 2048);
+    printf("La distancia es: ");
+    printf("%s",buffer);
     bzero(buffer, sizeof(buffer));
+
 
 
     return 0;
