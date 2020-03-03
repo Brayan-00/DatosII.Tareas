@@ -1,0 +1,4 @@
+/snap/clion/103/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/cmake-build-debug

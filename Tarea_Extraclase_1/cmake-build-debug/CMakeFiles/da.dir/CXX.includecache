@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/Server/Data.cpp
+string
+-
+iostream
+-
+fstream
+-
+

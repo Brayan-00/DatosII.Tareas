@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/Client/Client.cpp
+stdio.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+unistd.h
+-
+string.h
+-
+Data.cpp
+/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/Client/Data.cpp
+
+/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/Client/Data.cpp
+string
+-
+iostream
+-
+fstream
+-
+

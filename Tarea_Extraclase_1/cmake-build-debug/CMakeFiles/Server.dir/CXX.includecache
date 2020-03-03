@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/Server/Data.cpp
+string
+-
+iostream
+-
+fstream
+-
+Dijsktra.cpp
+/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/Server/Dijsktra.cpp
+
+/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/Server/Dijsktra.cpp
+bits/stdc++.h
+-
+
+/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/Server/Server.cpp
+unistd.h
+-
+cstdio
+-
+sys/socket.h
+-
+cstdlib
+-
+netinet/in.h
+-
+cstring
+-
+iostream
+-
+fstream
+-
+string
+-
+Data.cpp
+/home/brayanrv/TEC/V Semestre/Datos_II/DatosII.Tareas/Tarea_Extraclase_1/Server/Data.cpp
+
